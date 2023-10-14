@@ -12,3 +12,7 @@ output:
 ## Project thoughts
 
 I am interested in exploring data related to campaign finance reports in school board races. I'd like to find patterns in outside spending in these local races.
+
+## Project Proposal
+
+What is the effect of political polarization on American school boards? I hypothesize that in recent years, there has been more attention on school boards due to the ways that national issues have intersected with this local institution. While school boards are supposed to address issues that are locally relevant, they also at times have to address issues that are more nationally focused, such as public health measures during the COVID-19 pandemic, critical race theory, LGBTQ+ issues, etc. Since school boards are having to take a position on these issues and implement policies over them, they have increased on visibility and as a result become the target of national groups. This can come in many forms, from the mobilization of people to recruiting candidates to run in competitive school board races to pouring money into school board races. In order to explore this topic, I will analyze campaign finance data from a number of school board races over time and focus on campaign contributions from political action committees as well as national donors (which is my explanatory variable). My outcome variable is the result of these races. Patterns of increased spending in school board races that lead to outcomes that align with these donor networks will indicate that political polarization is seeping into school board races in a tangible way.
