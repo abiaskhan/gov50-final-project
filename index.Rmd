@@ -31,11 +31,17 @@ campaign_finance <- campaign_finance |>
 ```
 
 ```{r}
-campaign_finance |>
-  ggplot(mapping = aes(x = pac_prop)) +
-  geom_histogram() +
-  labs(x = "PAC Contributions as a Proportion of Total Campaign Contributions", y = "Frequency",
-       Title = "Frequency of the Proportion of PAC Contributions")
+campaign_finance
 ```
 
+```{r}
+plot_1 <- campaign_finance |>
+  ggplot(mapping = aes(x = pac_prop)) +
+  geom_histogram() +
+  labs(x = "PAC Contributions as a Proportion of Total Campaign Contributions", y = "Frequency", Title = "Frequency of the Proportion of PAC Contributions")
+```
+
+```{r}
+plot_1
+```
 
