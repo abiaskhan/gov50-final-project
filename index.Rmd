@@ -9,19 +9,54 @@ output:
 
 
 
-## Project thoughts
+## Introduction
 
-I am interested in exploring data related to campaign finance reports in school board races. I'd like to find patterns in outside spending in these local races.
+Recently, school boards across the country have been grappling with a number of political challenges and have often been weaponized to advance certain political agendas. From issues of public health (COVID and masking) to LGBTQ+ issues (North Carolina bathroom bills) to the curriculum (Critical Race Theory, book bans), school boards have had to address political issues that aren’t explicitly related to education. While all these issues remain pertinent for school boards across the country, the central mission of a school board remains unchanged: ensuring high student achievement, especially with concerns about learning loss following the pandemic. At the end of the day, school boards and districts are held accountable to the standards set by the state. Are they continuing to uphold these standards set by the state while addressing these additional political issues, or are these political issues serving as a distraction from addressing student achievement, leading into my main question, What is the effect of political extremism on school boards?
 
-## Project Proposal
+## Methods
 
-What is the effect of political polarization on American school boards? I hypothesize that in recent years, there has been more attention on school boards due to the ways that national issues have intersected with this local institution. While school boards are supposed to address issues that are locally relevant, they also at times have to address issues that are more nationally focused, such as public health measures during the COVID-19 pandemic, critical race theory, LGBTQ+ issues, etc. Since school boards are having to take a position on these issues and implement policies over them, they have increased on visibility and as a result become the target of national groups. This can come in many forms, from the mobilization of people to recruiting candidates to run in competitive school board races to pouring money into school board races. In order to explore this topic, I will analyze campaign finance data from a number of school board races over time and focus on campaign contributions from political action committees as well as national donors (which is my explanatory variable). My outcome variable is the result of these races. Patterns of increased spending in school board races that lead to outcomes that align with these donor networks will indicate that political polarization is seeping into school board races in a tangible way.
+In order to determine if there are any patterns in spending by political action committees (PACs) or candidate committees (federal or local), I compiled the campaign finance reports of candidates in school board races over a period of time. However, getting to this point was a multi-step process given the federalist nature of education and the fact that it is ultimately up to the individual states to determine how they govern their schools. As a result, there is significant variation from state to state regarding the governance structure of school districts, the number of school districts, how many layers of bureaucracy there are, etc.
 
-## Data Visualization
+The first step I took in compiling this data was by going to the U.S. Census Bureau and pulling the list of school districts (along with what county in the state they are associated with) they have recorded. The U.S. Census Bureau has collected this data every year up until 2022, so the data I am using for the purposes of this thesis is the 2022 report. This dataset had 18,990 districts across all 50 states and the District of Columbia.
+
+For this project, I analyze districts that represent entire counties (i.e., counties that only have a single school district representing the region). These districts will generally be bigger in size and represent more stakeholders than in districts where they are one of many in a single county. As a result, these will likely be higher-profile races, attracting more money and increasing the incentives for groups with a vested interest in the district to recruit candidates for a seat on the board or direct financial resources toward candidates who align with their political views. With this, patterns of spending will be easier to track than in smaller districts where the school board race is a lower-profile race. Furthermore, campaign finance laws for school board races dictate that campaign finance reports be filed with the county that the district is situated in (with a few exceptions); Therefore, stratifying my analysis by school districts that represent entire counties will allow for easier data collection.
+
+After cleaning up the data based on these conditions, I was left with 953 districts. However, I noticed that in some states, single districts were situated within multiple counties (and were often state departments of education and therefore were not governed by individual school boards but the state itself, which was the case in states like Hawaii and New York) or some districts were under mayoral control (such as the District of Columbia). After removing these districts, I was left with 942 districts representing 37 states. (For the purposes of this project, I focused on five school districts in Florida.)
+
+From there, I pulled the campaign finance reports from each county’s school board race from 2012-2022 from their respective campaign finance databases (often housed in the websites of local boards of elections, county recorders office, or the offices of the secretaries of state). I organized the campaign finance reports with the following columns:
+
+Candidate First Name
+Candidate Last Name
+State
+County
+District/Region
+Year of Race
+Total Contributions
+Total PAC Contributions
+Success of Race (with 1 meaning the candidate was elected, 0 otherwise)
+
+The independent variable I analyze is campaign contributions by national donors and/or political action committees. More specifically, I look at campaign contributions given by those with a certain political slant, such as unions, parent advocacy groups, school choice advocacy groups, etc. I use these groups as a mechanism for measuring the presence of political polarization within school boards, where increased spending in a particular race indicates an attempt for a certain political ideology or agenda to be pushed in via a particular candidate. Furthermore, I track these patterns over time in order to see if there are any changes in spending at a particular point in time.
+
+The dependent variables I analyze in my quantitative analysis are the volume of campaign contributions from political action committees (PACs) or candidate committees (federal or local) to school board candidates. The proportion of PAC and candidate committee contributions (relative to their total contributions) can show the level of outside interest within the race, going against the typical hyper-localized aspect of school board races.
+
 ```{r}
 library(tidyverse)
 campaign_finance <- read.csv("data/campaign_finance.csv")
+campaign_finance$Year <- as.character(campaign_finance$Year)
+
+avg_finance <- campaign_finance |>
+  group_by(Year) |>
+  summarize(mean(Total.Raised), mean(PAC.Contributions))
+
+avg_pac_cont <- avg_finance |>
+  ggplot(mapping = aes(x = Year, y = `mean(PAC.Contributions)`)) +
+  geom_col() +
+  labs(x = "Year", y = "Average PAC Contribution (in thousands)")
+
+avg_pac_cont
 ```
+
+## Results
 
 
 ## PAC Contributions as a Proportion of Total Campaign Contributions
@@ -66,3 +101,20 @@ This figure shows the relationship between the total contributions that a school
 However, it is clear that there are some points in the dataset that are further away from the cluster, indicating increased fundraising by the school board candidate themselves as well as increased contributions by PACs and candidate committees to school board candidates. While the former can be attributed to the rising costs of campaigns over time given their lengthened timeline, the latter is more difficult to explain, especially when the hyper-local nature of school board races has not changed. While the cost of political campaigns in general may be increasing, that does not explain why PACs and candidate committees would get involved financially in a school board races, especially when at the end of the day, financial resources are still scarce and candidates at the top of the ballot are in the greatest need of those resources.
 
 These outliers in PAC and candidate committee contributions indicate that there may be some groups with a vested interest in either that particular school board or the region the school board serves and is attempting to influence the outcome of the races by pouring financial resources into candidates who align with their political agenda.
+
+## Effect of Contributions on Election Results
+
+```{r}
+regression <- lm(Elected ~ Total.Raised + PAC.Contributions, data = campaign_finance)
+
+modelsummary::modelsummary(regression)
+```
+
+This regression shows that without any contributions, candidates will be elected 28.4% of the time. The coefficients for the Total.Raised and PAC.Contribution columns are 0, indicating that an increase in either of these values has no effect on a school board candidate's success.
+
+## Conclusion
+With these data, there's not much support for my hypothesis. In general, the data shows that contributions have no effect on election success, and that spending patterns (across both PAC contributions and other contributions) are rather stagnant and have no particular rhyme or rhythm.
+
+A limitation of the data is that school board races are typically low-dollar races, and any changes in contributions have happened very recently, meaning that there's only 1-2 cycles worth of data to draw from. Furthermore, any increases in spending in any particular race are likely to be outliers in the general dataset, making the data noisy.
+
+A few things could be done in order to increase the quality of my analysis. If I had more time, I would include more data points from different states and try to have as many districts as possible represented in my sample. Furthermore, while there might not be a systemic shift in PAC spending in school board races, the outliers in the dataset might also be telling (in terms of which districts are being targeted and by who), so doing a qualitiative analysis of these outliers could give additional information about the nature of school board races.
