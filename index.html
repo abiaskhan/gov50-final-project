@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["data/campaign_finance.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/figure-html5/unnamed-chunk-5-1.png","index_files/figure-html5/unnamed-chunk-6-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["data/campaign_finance.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/figure-html5/unnamed-chunk-5-1.png","index_files/figure-html5/unnamed-chunk-6-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/kePrint-0.0.1/kePrint.js","index_files/lightable-0.0.1/lightable.css","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1473,6 +1473,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   <!--/radix_placeholder_distill-->
   <script src="index_files/header-attrs-2.24/header-attrs.js"></script>
+  <script src="index_files/kePrint-0.0.1/kePrint.js"></script>
+  <link href="index_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
   <script src="index_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="index_files/popper-2.6.0/popper.min.js"></script>
   <link href="index_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
@@ -1517,17 +1519,45 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
-<h2 id="project-thoughts">Project thoughts</h2>
-<p>I am interested in exploring data related to campaign finance reports in school board races. I’d like to find patterns in outside spending in these local races.</p>
-<h2 id="project-proposal">Project Proposal</h2>
-<p>What is the effect of political polarization on American school boards? I hypothesize that in recent years, there has been more attention on school boards due to the ways that national issues have intersected with this local institution. While school boards are supposed to address issues that are locally relevant, they also at times have to address issues that are more nationally focused, such as public health measures during the COVID-19 pandemic, critical race theory, LGBTQ+ issues, etc. Since school boards are having to take a position on these issues and implement policies over them, they have increased on visibility and as a result become the target of national groups. This can come in many forms, from the mobilization of people to recruiting candidates to run in competitive school board races to pouring money into school board races. In order to explore this topic, I will analyze campaign finance data from a number of school board races over time and focus on campaign contributions from political action committees as well as national donors (which is my explanatory variable). My outcome variable is the result of these races. Patterns of increased spending in school board races that lead to outcomes that align with these donor networks will indicate that political polarization is seeping into school board races in a tangible way.</p>
-<h2 id="data-visualization">Data Visualization</h2>
+<h2 id="introduction">Introduction</h2>
+<p>Recently, school boards across the country have been grappling with a number of political challenges and have often been weaponized to advance certain political agendas. From issues of public health (COVID and masking) to LGBTQ+ issues (North Carolina bathroom bills) to the curriculum (Critical Race Theory, book bans), school boards have had to address political issues that aren’t explicitly related to education. While all these issues remain pertinent for school boards across the country, the central mission of a school board remains unchanged: ensuring high student achievement, especially with concerns about learning loss following the pandemic. At the end of the day, school boards and districts are held accountable to the standards set by the state. Are they continuing to uphold these standards set by the state while addressing these additional political issues, or are these political issues serving as a distraction from addressing student achievement, leading into my main question, What is the effect of political extremism on school boards?</p>
+<h2 id="methods">Methods</h2>
+<p>In order to determine if there are any patterns in spending by political action committees (PACs) or candidate committees (federal or local), I compiled the campaign finance reports of candidates in school board races over a period of time. However, getting to this point was a multi-step process given the federalist nature of education and the fact that it is ultimately up to the individual states to determine how they govern their schools. As a result, there is significant variation from state to state regarding the governance structure of school districts, the number of school districts, how many layers of bureaucracy there are, etc.</p>
+<p>The first step I took in compiling this data was by going to the U.S. Census Bureau and pulling the list of school districts (along with what county in the state they are associated with) they have recorded. The U.S. Census Bureau has collected this data every year up until 2022, so the data I am using for the purposes of this thesis is the 2022 report. This dataset had 18,990 districts across all 50 states and the District of Columbia.</p>
+<p>For this project, I analyze districts that represent entire counties (i.e., counties that only have a single school district representing the region). These districts will generally be bigger in size and represent more stakeholders than in districts where they are one of many in a single county. As a result, these will likely be higher-profile races, attracting more money and increasing the incentives for groups with a vested interest in the district to recruit candidates for a seat on the board or direct financial resources toward candidates who align with their political views. With this, patterns of spending will be easier to track than in smaller districts where the school board race is a lower-profile race. Furthermore, campaign finance laws for school board races dictate that campaign finance reports be filed with the county that the district is situated in (with a few exceptions); Therefore, stratifying my analysis by school districts that represent entire counties will allow for easier data collection.</p>
+<p>After cleaning up the data based on these conditions, I was left with 953 districts. However, I noticed that in some states, single districts were situated within multiple counties (and were often state departments of education and therefore were not governed by individual school boards but the state itself, which was the case in states like Hawaii and New York) or some districts were under mayoral control (such as the District of Columbia). After removing these districts, I was left with 942 districts representing 37 states. (For the purposes of this project, I focused on five school districts in Florida.)</p>
+<p>From there, I pulled the campaign finance reports from each county’s school board race from 2012-2022 from their respective campaign finance databases (often housed in the websites of local boards of elections, county recorders office, or the offices of the secretaries of state). I organized the campaign finance reports with the following columns:</p>
+<p>Candidate First Name
+Candidate Last Name
+State
+County
+District/Region
+Year of Race
+Total Contributions
+Total PAC Contributions
+Success of Race (with 1 meaning the candidate was elected, 0 otherwise)</p>
+<p>The independent variable I analyze is campaign contributions by national donors and/or political action committees. More specifically, I look at campaign contributions given by those with a certain political slant, such as unions, parent advocacy groups, school choice advocacy groups, etc. I use these groups as a mechanism for measuring the presence of political polarization within school boards, where increased spending in a particular race indicates an attempt for a certain political ideology or agenda to be pushed in via a particular candidate. Furthermore, I track these patterns over time in order to see if there are any changes in spending at a particular point in time.</p>
+<p>The dependent variables I analyze in my quantitative analysis are the volume of campaign contributions from political action committees (PACs) or candidate committees (federal or local) to school board candidates. The proportion of PAC and candidate committee contributions (relative to their total contributions) can show the level of outside interest within the race, going against the typical hyper-localized aspect of school board races.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
-<span><span class='va'>campaign_finance</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span><span class='st'>"data/campaign_finance.csv"</span><span class='op'>)</span></span></code></pre>
+<span><span class='va'>campaign_finance</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span><span class='st'>"data/campaign_finance.csv"</span><span class='op'>)</span></span>
+<span><span class='va'>campaign_finance</span><span class='op'>$</span><span class='va'>Year</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='va'>campaign_finance</span><span class='op'>$</span><span class='va'>Year</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>avg_finance</span> <span class='op'>&lt;-</span> <span class='va'>campaign_finance</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>Year</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>Total.Raised</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>PAC.Contributions</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>avg_pac_cont</span> <span class='op'>&lt;-</span> <span class='va'>avg_finance</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Year</span>, y <span class='op'>=</span> <span class='va'>`mean(PAC.Contributions)`</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Year"</span>, y <span class='op'>=</span> <span class='st'>"Average PAC Contribution (in thousands)"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>avg_pac_cont</span></span></code></pre>
 </div>
+<p><img src="index_files/figure-html5/unnamed-chunk-1-1.png" width="624" /></p>
 </div>
+<h2 id="results">Results</h2>
 <h2 id="pac-contributions-as-a-proportion-of-total-campaign-contributions">PAC Contributions as a Proportion of Total Campaign Contributions</h2>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -1573,6 +1603,133 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>This figure shows the relationship between the total contributions that a school board candidate receives and the total PAC and candidate committee contributions they receive. This plot shows that most of the data points are clustered between $0-$50,000 on the x-axis and $0-$10,000 on the y-axis. This is expected given that school board races are at the bottom of the ballot, meaning that they end up being low-information and low-turnout races, and therefore low-budget races. Adding onto the fact that school board races are often not competitive, school board candidates do not have to raise much money in order to win a race (relative to other local and federal races) and this figure affirms that to a certain extent. Furthermore, PACs and candidate committees typically do not get involved in school board races, whether that be through an endorsement, candidate recruitment, etc. Therefore, school board candidates typically receive very few contributions from PACs and candidate committees, with perhaps modest contributions coming from local labor unions.</p>
 <p>However, it is clear that there are some points in the dataset that are further away from the cluster, indicating increased fundraising by the school board candidate themselves as well as increased contributions by PACs and candidate committees to school board candidates. While the former can be attributed to the rising costs of campaigns over time given their lengthened timeline, the latter is more difficult to explain, especially when the hyper-local nature of school board races has not changed. While the cost of political campaigns in general may be increasing, that does not explain why PACs and candidate committees would get involved financially in a school board races, especially when at the end of the day, financial resources are still scarce and candidates at the top of the ballot are in the greatest need of those resources.</p>
 <p>These outliers in PAC and candidate committee contributions indicate that there may be some groups with a vested interest in either that particular school board or the region the school board serves and is attempting to influence the outcome of the races by pouring financial resources into candidates who align with their political agenda.</p>
+<h2 id="effect-of-contributions-on-election-results">Effect of Contributions on Election Results</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>regression</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Elected</span> <span class='op'>~</span> <span class='va'>Total.Raised</span> <span class='op'>+</span> <span class='va'>PAC.Contributions</span>, data <span class='op'>=</span> <span class='va'>campaign_finance</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='va'>regression</span><span class='op'>)</span></span></code></pre>
+</div>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+ (1)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:center;">
+0.284
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.040)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Total.Raised
+</td>
+<td style="text-align:center;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.000)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PAC.Contributions
+</td>
+<td style="text-align:center;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;box-shadow: 0px 1.5px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1.5px">
+(0.000)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Num.Obs.
+</td>
+<td style="text-align:center;">
+204
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2
+</td>
+<td style="text-align:center;">
+0.098
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2 Adj.
+</td>
+<td style="text-align:center;">
+0.089
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AIC
+</td>
+<td style="text-align:center;">
+271.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BIC
+</td>
+<td style="text-align:center;">
+284.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Log.Lik.
+</td>
+<td style="text-align:center;">
+−131.766
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RMSE
+</td>
+<td style="text-align:center;">
+0.46
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>This regression shows that without any contributions, candidates will be elected 28.4% of the time. The coefficients for the Total.Raised and PAC.Contribution columns are 0, indicating that an increase in either of these values has no effect on a school board candidate’s success.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>With these data, there’s not much support for my hypothesis. In general, the data shows that contributions have no effect on election success, and that spending patterns (across both PAC contributions and other contributions) are rather stagnant and have no particular rhyme or rhythm.</p>
+<p>A limitation of the data is that school board races are typically low-dollar races, and any changes in contributions have happened very recently, meaning that there’s only 1-2 cycles worth of data to draw from. Furthermore, any increases in spending in any particular race are likely to be outliers in the general dataset, making the data noisy.</p>
+<p>A few things could be done in order to increase the quality of my analysis. If I had more time, I would include more data points from different states and try to have as many districts as possible represented in my sample. Furthermore, while there might not be a systemic shift in PAC spending in school board races, the outliers in the dataset might also be telling (in terms of which districts are being targeted and by who), so doing a qualitiative analysis of these outliers could give additional information about the nature of school board races.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
